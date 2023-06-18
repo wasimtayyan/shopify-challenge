@@ -7,22 +7,27 @@ function MovieCard({
   type,
   nominate,
   setNominate,
-  movie
+  movie,
+  setError
 }) {
   const [isDisable, setIsDisable] = useState(false);
   function handleClick() {
     if (nominate.length < 5) {
       setNominate([...nominate, movie]);
       setIsDisable(true);
+      setError(null)
+      
+    }else if(nominate.length === 5){
+      setError("Nominated list can't include more than 5 movies!");
     }
   }
   return (
-    <div className="border-t flex justify-between items-center py-5 px-5 border-slate-300">
+    <div className="border-t flex justify-between items-center mt-5 py-5 px-5 border-emerald-900">
       <div>
-        <h3 className="font-bold  text-purple-700 w-20 truncate md:w-48">
+        <h3 className="font-bold  text-emerald-800 w-20 truncate md:w-48">
           {title}
         </h3>
-        <h5 className="text-purple-700">
+        <h5 className="text-emerald-600">
           <span>{year}</span>•<span>{type}</span>
         </h5>
       </div>
@@ -30,7 +35,7 @@ function MovieCard({
         <button
           onClick={handleClick}
           disabled={isDisable}
-          className="px-4 py-2 border bg-purple-700 text-white  rounded-lg hover:text-purple-700  hover:bg-transparent hover:border hover:border-purple-700 cursor-pointer disabled:opacity-25"
+          className="px-4 py-2 border bg-emerald-900 text-white  rounded-lg hover:text-emerald-600  hover:bg-transparent hover:border hover:border-emerald-600 cursor-pointer disabled:opacity-25"
         >
           Nominate
         </button>
