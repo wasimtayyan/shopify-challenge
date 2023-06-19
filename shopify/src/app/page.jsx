@@ -26,7 +26,7 @@ export default function Home() {
     setWinner('')
     if (Search.trim() != "" && Search.length > 2) {
       const res = await fetch(
-        `http://www.omdbapi.com/?s=${Search}&apikey=6be19735`
+        `https://www.omdbapi.com/?s=${Search}&apikey=6be19735`
       );
       const data = await res.json();
       console.log(data);
