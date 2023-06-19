@@ -13,6 +13,7 @@ export default function Home() {
   const [value] = useDebounce(Search, 500);
   const [SearchResult, setSearchResult] = useState([]);
   const [nominate, setNominate] = useState([]);
+  const [winner, setWinner] = useState('');
   const [Error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisable, setIsDisable] = useState(false);
@@ -22,6 +23,7 @@ export default function Home() {
   async function getMovies() {
     setIsLoading(true);
     setError(null);
+    setWinner('')
     if (Search.trim() != "" && Search.length > 2) {
       const res = await fetch(
         `http://www.omdbapi.com/?s=${Search}&apikey=6be19735`
@@ -42,9 +44,15 @@ export default function Home() {
   useEffect(() => {
     getMovies();
   }, [value]);
-  // console.log(SearchResult);
-  console.log(isLoading);
   //
+  function handleWinner() {
+    setSearchResult([]);
+    const winnerNumber = Math.floor(Math.random(nominate) * nominate.length);
+    setWinner(nominate[winnerNumber]);
+    
+  }
+  
+ 
 
   return (
     <main className="flex flex-wrap w-full flex-col md:flex-row ">
@@ -91,21 +99,48 @@ export default function Home() {
             </div>
           )}
           {Error && <p className="text-red-500 py-4 text-lg">{Error}</p>}
-
+          {nominate.length >= 5 ? (
+            <div>
+              <h1 className="font-bold text-lg text-[#906509] py-4">
+                you choose carefully. now it is time to reveal the winner
+              </h1>
+              <button
+                onClick={handleWinner}
+                className="text-white transition translate-y-4 ease-in-out delay-150 bg-[#004c3f] p-[7px] rounded-full shadow-md cursor-pointer hover:-translate-y-1 hover:opacity-50 md:translate-y-0"
+              >
+                Reveal Winner
+              </button>
+            </div>
+          ) : null}
           {SearchResult?.slice(0, 5).map((movie) => {
             return (
               <MovieCard
                 key={movie.imdbId}
-                setError={setError}
                 movie={movie}
                 title={movie.Title}
                 year={movie.Year}
                 type={movie.Type}
                 setNominate={setNominate}
+                setError={setError}
+                setSearchResult={setSearchResult}
                 nominate={nominate}
               />
             );
           })}
+          {winner ? (
+            <div className="py-5 flex flex-col  justify-center items-center">
+              <img
+                className="justify-self-center"
+                src={winner.Poster}
+                alt="poster"
+                height={300}
+                width={200}
+              />
+              <h2 className="text-xl text-center text-[#004c3f] py-3">
+                {winner.Title}
+              </h2>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="md:w-1/2 bg-emerald-900 min-h-screen">

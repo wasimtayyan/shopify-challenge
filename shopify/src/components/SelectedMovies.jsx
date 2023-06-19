@@ -1,4 +1,6 @@
 import React from "react";
+import ClearIcon from "@mui/icons-material/Clear";
+
 
 function SelectedMovies({
   title,
@@ -9,11 +11,14 @@ function SelectedMovies({
   setNominate,
   movie,
   setIsDisable,
+
 }) {
   function handleDelete() {
     setNominate(nominate.filter((item) => item.imdbID != movie.imdbID));
-    setIsDisable(false)
+    setIsDisable(false);
+    
   }
+  const hiden = nominate.includes(movie) ? "" : "hidden";
   return (
     <div>
       <div className="flex font-serif justify-between items-center  px-5 text-[#FAF7ED] border border-green-700   md:px-12 mx-8 mb-10">
@@ -28,9 +33,10 @@ function SelectedMovies({
         <div>
           <button
             onClick={handleDelete}
-            className="transition translate-y-4 ease-in-out delay-150 bg-green-700 p-[7px] rounded-full shadow-md cursor-pointer hover:-translate-y-1 hover:opacity-50 md:translate-y-0 "
+            className={`transition translate-y-4 ease-in-out delay-150 bg-green-700 p-[7px] rounded-full shadow-md cursor-pointer hover:-translate-y-1 hover:opacity-50 md:translate-y-0 ${hiden}`}
           >
-            x
+            <ClearIcon />
+            
           </button>
         </div>
       </div>

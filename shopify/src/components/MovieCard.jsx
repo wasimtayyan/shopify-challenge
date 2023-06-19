@@ -8,19 +8,21 @@ function MovieCard({
   nominate,
   setNominate,
   movie,
-  setError
+  setError,
+  
 }) {
   const [isDisable, setIsDisable] = useState(false);
   function handleClick() {
     if (nominate.length < 5) {
       setNominate([...nominate, movie]);
-      setIsDisable(true);
-      setError(null)
+      setError(null);
+    } 
+    // else if (nominate.length > 4) {
+    //   setError("Nominated list can't include more than 5 movies!");
       
-    }else if(nominate.length === 5){
-      setError("Nominated list can't include more than 5 movies!");
-    }
+    // }
   }
+  const hiden = nominate.includes(movie) ? "hidden" : "";
   return (
     <div className="border-t flex justify-between items-center mt-5 py-5 px-5 border-emerald-900">
       <div>
@@ -34,8 +36,7 @@ function MovieCard({
       <div>
         <button
           onClick={handleClick}
-          disabled={isDisable}
-          className="px-4 py-2 border bg-emerald-900 text-white  rounded-lg hover:text-emerald-600  hover:bg-transparent hover:border hover:border-emerald-600 cursor-pointer disabled:opacity-25"
+          className={`px-4 py-2 border bg-emerald-900 text-white  rounded-lg hover:text-emerald-600  hover:bg-transparent hover:border hover:border-emerald-600 cursor-pointer ${hiden}`}
         >
           Nominate
         </button>
