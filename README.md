@@ -13,10 +13,15 @@ Create a webpage that can search OMDB for movies, allowing users to save their f
 - Movies in the nomination list should be able to be removed.
 - Display a banner when the user has 5 nominations.
 
+### How it looks like:
+
+![image](https://github.com/wasimtayyan/shopify-challenge/assets/127048388/ea3b0cb5-cfed-4682-b966-563ebc28530f)
+
+
 ### live link: https://main--the-shoppis-nomantion.netlify.app/
 
 
-![netflix-losing-the-office-jpg](https://github.com/wasimtayyan/shopify-challenge/assets/127048388/4750459a-0475-41af-84a7-5bd452776c03)
+
 
 
 
